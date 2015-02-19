@@ -1,0 +1,2 @@
+# controle-estoque-custo-medio-ponderado
+Sistema de controle estoque com saida de produtos de custo medio ponderado utilizando as tecnologias JAVA EE, JSF 2.0, PostgreSQL como banco de dados, JDBC para conexão com o banco, glassfish como servidor de aplicação. 
