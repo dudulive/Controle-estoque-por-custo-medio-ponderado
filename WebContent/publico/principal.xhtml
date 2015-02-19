@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view locale="#{internacionalizacaoBean.linguagem}">
+	<h:head>
+		<title><h:outputText value="#{msg['tituloPrincipal']}" /></title>
+		<link rel="stylesheet" type="text/css"
+			href="../resources/css/estilo.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="5" border="1" cellpadding="2" cellspacing="8"
+				headerClass="cabecalho">
+				<f:facet name="header">
+					<h:outputLabel value="#{msg['menuPrincipal']}" />
+					<br />
+					<h:panelGrid columns="4">
+						<h:outputText value="#{msg['linguagem']}" />
+						<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+							<h:graphicImage library="imagens" name="bandeira_en_US.png"
+								style="border:0" />
+							<f:setPropertyActionListener value="en"
+								target="#{internacionalizacaoBean.linguagem}" />
+							<f:setPropertyActionListener value=""
+								target="#{internacionalizacaoBean.pais}" />
+						</h:commandLink>
+						<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+							<h:graphicImage library="imagens" name="bandeira_pt_BR.png"
+								style="border:0" />
+							<f:setPropertyActionListener value="pt"
+								target="#{internacionalizacaoBean.linguagem}" />
+							<f:setPropertyActionListener value=""
+								target="#{internacionalizacaoBean.pais}" />
+						</h:commandLink>
+						<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+							<h:graphicImage library="imagens" name="bandeira_es_ES.png"
+								style="border:0" />
+							<f:setPropertyActionListener value="es"
+								target="#{internacionalizacaoBean.linguagem}" />
+							<f:setPropertyActionListener value=""
+								target="#{internacionalizacaoBean.pais}" />
+						</h:commandLink>
+					</h:panelGrid>
+				</f:facet>
+				<h:commandButton value="#{msg['produto']}"
+					action="actionListarProduto" />
+				<h:commandButton value="#{msg['entradas']}"
+					action="actionListarEntrada" />
+				<h:commandButton value="#{msg['saidas']}" action="actionListarSaida" />
+				<h:commandButton value="#{msg['relatorioEstoque']}"
+					action="actionListarSaldo" />
+				<h:commandLink action="#{usuarioBean.actionLogout}">
+					<h:graphicImage library="imagens" name="logout.png"
+						style="border:0" />
+				</h:commandLink>
+			</h:panelGrid>
+		</h:form>
+		<div align="center">
+			<hr />
+			<h1>
+				<h:outputText value="#{msg['controleEstoque']}" />
+				<br />
+				<h:outputText value="#{msg['cmp']}" />
+			</h1>
+			<hr />
+		</div>
+	</h:body>
+</f:view>
+</html>

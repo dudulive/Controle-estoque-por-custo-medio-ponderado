@@ -1,0 +1,89 @@
+/* Definição de estilos para toda a tabela*/
+
+.tabela {
+
+     border: 2px solid black;
+
+}
+
+ 
+
+/* Definição de estilos para linha de cabeçalho da tabela*/
+
+.cabecalho {
+
+   text-align: center;
+
+   font: 13px Arial, sans-serif;
+
+   font-weight: bold;
+
+   color: Snow;
+
+   background:  #4682B4;
+  
+}
+
+ 
+
+/* Definição de estilos para coluna */
+
+.primeiro {
+
+   text-align: center;
+
+   font: 12px Arial, sans-serif;
+
+}
+
+ 
+
+/* Definição de estilos para coluna */
+
+.ultimo {
+
+   font: 12px Arial, sans-serif;
+
+   text-align: center;
+
+}
+
+
+.entrada{
+	font: 13px Arial, sans-serif;
+
+   text-align: center;
+
+   background: #ADD8E6;
+   
+   font-weight: bold;
+
+   color: black;
+}
+
+.saida{
+	font: 13px Arial, sans-serif;
+
+   text-align: center;
+
+   background: #B0C4DE;
+   
+   font-weight: bold;
+
+
+   color: black;
+}
+
+.saldo{
+	font: 13px Arial, sans-serif;
+
+   text-align: center;
+
+   background: #AFEEEE;
+   
+   font-weight: bold;
+
+   color: black;
+}
+
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view locale="#{internacionalizacaoBean.linguagem}">
+<h:head>
+	<title><h:outputText value="#{msg['tituloUsuario']}" /></title>
+	<link rel="stylesheet" type="text/css" href="../resources/css/estilo.css" />
+</h:head>
+<h:body>
+	<div align="center">
+		<h:form>
+			<h:panelGrid columns="4" headerClass="cabecalho">
+				<h:outputText value="#{msg['linguagem']}" />
+				<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+					<h:graphicImage library="imagens" name="bandeira_en_US.png"
+						style="border:0" />
+					<f:setPropertyActionListener value="en"
+						target="#{internacionalizacaoBean.linguagem}" />
+					<f:setPropertyActionListener value=""
+						target="#{internacionalizacaoBean.pais}" />
+				</h:commandLink>
+				<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+					<h:graphicImage library="imagens" name="bandeira_pt_BR.png"
+						style="border:0" />
+					<f:setPropertyActionListener value="pt"
+						target="#{internacionalizacaoBean.linguagem}" />
+					<f:setPropertyActionListener value=""
+						target="#{internacionalizacaoBean.pais}" />
+				</h:commandLink>
+				<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+					<h:graphicImage library="imagens" name="bandeira_es_ES.png"
+						style="border:0" />
+					<f:setPropertyActionListener value="es"
+						target="#{internacionalizacaoBean.linguagem}" />
+					<f:setPropertyActionListener value=""
+						target="#{internacionalizacaoBean.pais}" />
+				</h:commandLink>
+			</h:panelGrid>
+			<h:inputHidden value="#{usuarioBean.usuario.id}" />
+			<h:inputHidden value="#{usuarioBean.destinoSalvar}" />
+			<h:messages style="color:red;margin:8px;" layout="table" />
+			<h:panelGrid columns="2">
+				<f:facet name="header">
+					<h:outputLabel value="#{msg['cadastroUsuario']}" />
+				</f:facet>
+				<h:outputLabel value="#{msg['nomeLabel']}:" />
+				<h:inputText value="#{usuarioBean.usuario.nome}" id="nome"
+					required="true" requiredMessage="#{msg['valido']} #{msg['nomeLabel']}." />
+               
+				<h:outputLabel value="#{msg['idiomaLabel']}:" />
+				<h:selectOneMenu value="#{usuarioBean.usuario.idioma}">
+					<f:selectItem itemLabel="#{msg['portugues']}" itemValue="pt_BR" />
+					<f:selectItem itemLabel="#{msg['ingles']}" itemValue="en_US" />
+					<f:selectItem itemLabel="#{msg['espanhol']}" itemValue="es_ES" />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="#{msg['loginLabel']}:" />
+				<h:inputText value="#{usuarioBean.usuario.login}" id="login"
+					required="true" requiredMessage="#{msg['valido']} #{msg['loginLabel']}." />
+               
+				<h:outputLabel value="#{msg['senhaLabel']}:" />
+				<h:inputSecret value="#{usuarioBean.usuario.senha}" id="senha"
+					required="true" requiredMessage="#{msg['valida']} #{msg['senhaLabel']}." />
+                
+                
+				<h:outputLabel value="#{msg['confirmeSenhaLabel']}:" />
+				<h:inputSecret value="#{usuarioBean.confirmaSenha}" id="confirmeSenha"
+					required="true" requiredMessage="#{msg['valida']} #{msg['confirmeSenhaLabel']}." />
+          
+			</h:panelGrid>
+			<h:commandButton value="#{msg['salvarLabel']}"
+				action="#{usuarioBean.actionSalvar}" />
+		</h:form>
+	</div>
+</h:body>
+</f:view>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view locale="#{internacionalizacaoBean.linguagem}">
+<h:head>
+	<title><h:outputText value="#{msg['tituloAdminProduto']}" /></title>
+	<link rel="stylesheet" type="text/css" href="../resources/css/estilo.css" />
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2" border="2" headerClass="cabecalho" >
+			<f:facet name="header">
+				<h:outputLabel value="#{msg['menuPrincipal']}" />
+			</f:facet>
+			<h:commandLink value="#{msg['listarProdutos']}"  action="actionListarAlteracaoProduto" />
+			<h:commandLink value="#{msg['voltar']}" action="actionVoltarMenu" />
+		</h:panelGrid>
+	</h:form>
+	<hr />
+	<h1><h:outputText value="#{msg['cadastroSucesso']}" /></h1>
+</h:body>
+</f:view>
+</html>

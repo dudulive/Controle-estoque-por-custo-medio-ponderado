@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view locale="#{internacionalizacaoBean.linguagem}">
+	<h:head>
+		<title><h:outputText value="#{msg['tituloAdminProduto']}" /></title>
+		<link rel="stylesheet" type="text/css"
+			href="../resources/css/estilo.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="2" border="1" cellpadding="2" cellspacing="4"
+				headerClass="cabecalho">
+				<f:facet name="header">
+					<h:outputLabel value="#{msg['menuPrincipal']}" />
+					<h:panelGrid columns="4">
+						<h:outputText value="#{msg['linguagem']}" />
+						<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+							<h:graphicImage library="imagens" name="bandeira_en_US.png"
+								style="border:0" />
+							<f:setPropertyActionListener value="en"
+								target="#{internacionalizacaoBean.linguagem}" />
+							<f:setPropertyActionListener value=""
+								target="#{internacionalizacaoBean.pais}" />
+						</h:commandLink>
+						<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+							<h:graphicImage library="imagens" name="bandeira_pt_BR.png"
+								style="border:0" />
+							<f:setPropertyActionListener value="pt"
+								target="#{internacionalizacaoBean.linguagem}" />
+							<f:setPropertyActionListener value=""
+								target="#{internacionalizacaoBean.pais}" />
+						</h:commandLink>
+						<h:commandLink action="#{internacionalizacaoBean.mudarIdioma}">
+							<h:graphicImage library="imagens" name="bandeira_es_ES.png"
+								style="border:0" />
+							<f:setPropertyActionListener value="es"
+								target="#{internacionalizacaoBean.linguagem}" />
+							<f:setPropertyActionListener value=""
+								target="#{internacionalizacaoBean.pais}" />
+						</h:commandLink>
+					</h:panelGrid>
+				</f:facet>
+				<h:commandButton value="#{msg['relatorioEstoque']}"
+					action="actionListarSaldo" />
+			</h:panelGrid>
+		</h:form>
+		<hr />
+		<div align="center">
+			<h1>
+				<h:outputText value="#{msg['controleEstoque']}" />
+				<br />
+				<h:outputText value="#{msg['cmp']}" />
+			</h1>
+			<h:form>
+				<h:dataTable value="#{saldoBean.listHistoricoProduto}" var="saldo"
+					rules="rows" cellpadding="5" border="2" styleClass="tabela"
+					footerClass="cabecalho" headerClass="cabecalho"
+					rowClasses="primeiro,ultimo">
+					<f:facet name="header">
+						<h:outputLabel value="#{msg['relatorioEstoque']}" />
+						<table style="width:100%;">
+							<tr>
+								<td style="width:30%;" ><h:outputLabel  value="#{msg['entradasEstoque']}" /></td>
+								<td style="width:30%;" ><h:outputLabel  value="#{msg['saidasEstoque']}" /></td>
+								<td style="width:40%;"><h:outputLabel  value="#{msg['saldosEstoque']}" /></td>
+							</tr>
+						</table>
+					</f:facet>
+					<f:facet name="footer">
+						<h:outputLabel value="#{msg['finalLista']}" />
+					</f:facet>
+					<h:column headerClass="entrada">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['dataEntrada']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'entrada'}"
+							value="#{saldo.movimento.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</h:column>
+					<h:column headerClass="entrada">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['qtdProdtuto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'entrada'}"
+							value="#{saldo.movimento.qtdItem}" />
+					</h:column>
+					<h:column headerClass="entrada">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['precoProduto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'entrada'}"
+							value="#{saldo.movimento.precoItem}">
+							<f:convertNumber maxFractionDigits="3" pattern="R$ #,###0.000" />
+						</h:outputText>
+					</h:column>
+					<h:column headerClass="entrada">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['precoTotalProduto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'entrada'}"
+							value="#{saldo.movimento.precoTotal}">
+							<f:convertNumber maxFractionDigits="2" pattern="R$ #,##0.00" />
+						</h:outputText>
+					</h:column>
+					<!-- saidas -->
+					<h:column headerClass="saida">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['dataSaida']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'saida'}"
+							value="#{saldo.movimento.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</h:column>
+					<h:column headerClass="saida">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['qtdProdtuto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'saida'}"
+							value="#{saldo.movimento.qtdItem}" />
+					</h:column>
+					<h:column headerClass="saida">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['precoProduto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'saida'}"
+							value="#{saldo.movimento.precoItem}">
+							<f:convertNumber maxFractionDigits="3" pattern="R$ #,###0.000" />
+						</h:outputText>
+					</h:column>
+					<h:column headerClass="saida">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['precoTotalProduto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.movimento.tipo == 'saida'}"
+							value="#{saldo.movimento.precoTotal}">
+							<f:convertNumber maxFractionDigits="2" pattern="R$ #,##0.00" />
+						</h:outputText>
+					</h:column>
+					<!-- saldos -->
+					<h:column headerClass="saldo">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['dataSaldo']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.tipo == 'saldo'}"
+							value="#{saldo.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</h:column>
+					<h:column headerClass="saldo">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['qtdProdtuto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.tipo == 'saldo'}"
+							value="#{saldo.somaQtdTotal}" />
+					</h:column>
+					<h:column headerClass="saldo">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['precoProduto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.tipo == 'saldo'}"
+							value="#{saldo.precoMedio}">
+							<f:convertNumber maxFractionDigits="3" pattern="R$ #,###0.000" />
+						</h:outputText>
+					</h:column>
+					<h:column headerClass="saldo">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['precoTotalProduto']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.tipo == 'saldo'}"
+							value="#{saldo.somaPrecoTotal}">
+							<f:convertNumber maxFractionDigits="2" pattern="R$ #,##0.00" />
+						</h:outputText>
+					</h:column>
+					<h:column headerClass="saldo">
+						<f:facet name="header">
+							<h:outputLabel value="#{msg['cmv']}" />
+						</f:facet>
+						<h:outputText rendered="#{saldo.tipo == 'saldo'}"
+							value="#{saldo.cmv}">
+							<f:convertNumber maxFractionDigits="2" pattern="R$ #,##0.00" />
+						</h:outputText>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+	</h:body>
+</f:view>
+</html>
