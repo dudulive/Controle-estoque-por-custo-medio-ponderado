@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -68,23 +69,29 @@ public class UsuarioBean implements Serializable {
 	
 	public String actionLogin() {
 		String destino = null;
+		FacesContext context = FacesContext.getCurrentInstance();
 		if(usuario.getLogin().length() > 0 && usuario.getSenha().length() > 0){
 			UsuarioRN usuarioRN = new UsuarioRN();
 			usuario = usuarioRN.findByNameAndPassword(usuario);
 			if(usuario == null){
 				FacesMessage message = new FacesMessage("Dados Inválidos");
-				FacesContext context = FacesContext.getCurrentInstance();
+				message.setSeverity ( FacesMessage.SEVERITY_ERROR) ;
 				context.addMessage(null, message);
 			}else if(usuario != null){
+				ExternalContext ec = context.getExternalContext();
+				HttpSession session =(HttpSession) ec.getSession(false);
+				session.setAttribute("usuario", this.usuario);
 				destino = "principal";
 			}
 		}
 		return destino;
 	}
 	
-	 public String actionLogout() {  
-	      HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);  
-	      sessao.invalidate();  
+	 public String actionLogout() { 
+		  FacesContext context = FacesContext.getCurrentInstance();
+		  ExternalContext ec = context.getExternalContext();
+	      HttpSession sessao = (HttpSession) ec.getSession(true);  
+	      sessao.removeAttribute("usuario"); 
 	      return "login"; //AQUI EU PASSO O NOME DA MINHA TELA INICIAL.  
 	 }
 
